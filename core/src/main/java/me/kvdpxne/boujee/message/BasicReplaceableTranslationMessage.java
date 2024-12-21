@@ -1,6 +1,7 @@
 package me.kvdpxne.boujee.message;
 
 import java.util.Map;
+import me.kvdpxne.boujee.replace.Characters;
 
 public class BasicReplaceableTranslationMessage
   extends BasicTranslationMessage
@@ -8,31 +9,31 @@ public class BasicReplaceableTranslationMessage
 
   private static final long serialVersionUID = -8395546537545631026L;
 
-  public BasicReplaceableTranslationMessage(final String[] message) {
+  public BasicReplaceableTranslationMessage(final char[][] message) {
     super(message);
   }
 
   @Override
   public ReplacableTranslationMessage replace(
-    final String field,
-    final Object value
+    final char[] field,
+    final char[] value
   ) {
-    return null;
+    final char[][] newContent = super.message;
+    for (int i = 0; i < super.message.length; ++i) {
+      newContent[i] = Characters.replace(newContent[i], field, value);
+    }
+    return new BasicReplaceableTranslationMessage(newContent);
   }
 
   @Override
   public ReplacableTranslationMessage replace(
-    final Map<String, Object> values
+    final Map<char[], char[]> values
   ) {
-    final int length = super.message.length;
-    final String[] newContent = new String[length];
-    for (int i = 0; i < length; i++) {
-      String newContentLine = newContent[i];
-      for (final Map.Entry<String, Object> entry : values.entrySet()) {
-        newContentLine = newContentLine.replace(
-          entry.getKey(),
-          entry.getValue().toString()
-        );
+    final char[][] newContent = super.message;
+    for (int i = 0; i < super.message.length; ++i) {
+      char[] newContentLine = newContent[i];
+      for (final Map.Entry<char[], char[]> entry : values.entrySet()) {
+        newContentLine = Characters.replace(newContentLine, entry.getKey(), entry.getValue());
       }
       newContent[i] = newContentLine;
     }

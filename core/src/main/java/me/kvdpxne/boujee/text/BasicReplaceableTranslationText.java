@@ -1,6 +1,7 @@
 package me.kvdpxne.boujee.text;
 
 import java.util.Map;
+import me.kvdpxne.boujee.replace.Characters;
 
 public class BasicReplaceableTranslationText
   extends BasicTranslationText
@@ -8,27 +9,28 @@ public class BasicReplaceableTranslationText
 
   private static final long serialVersionUID = 3626337823661723471L;
 
-  public BasicReplaceableTranslationText(final String content) {
+  public BasicReplaceableTranslationText(final char[] content) {
     super(content);
   }
 
   @Override
   public ReplaceableTranslationText replace(
-    final String field,
-    final Object value
+    final char[] field,
+    final char[] value
   ) {
-    final String newContent = super.content.replace(field, value.toString());
-    return new BasicReplaceableTranslationText(newContent);
+    return new BasicReplaceableTranslationText(
+      Characters.replace(super.text, field, value)
+    );
   }
 
   @Override
   public ReplaceableTranslationText replace(
-    final Map<String, Object> values
+    final Map<char[], char[]> values
   ) {
-    String newContent = super.content;
-    for (Map.Entry<String, Object> entry : values.entrySet()) {
-      newContent = newContent.replace(entry.getKey(), entry.getValue().toString());
+    char[] newContent = super.text;
+    for (final Map.Entry<char[], char[]> entry : values.entrySet()) {
+      newContent = Characters.replace(newContent, entry.getKey(), entry.getValue());
     }
-    return new BasicReplaceableTranslationText(newContent);
+    return null;
   }
 }

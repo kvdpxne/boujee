@@ -1,5 +1,5 @@
 dependencies {
-  implementation(project(":boujee-api"))
-  implementation(project(":boujee-minecraft-api"))
-  implementation(project(":boujee-core"))
+  implementation(project(":p-api"))
+  implementation(project(":p-minecraft:api"))
+  implementation(project(":p-core"))
 }

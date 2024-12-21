@@ -14,8 +14,8 @@ public class BasicLocaleTranslations
   implements LocaleTranslations {
 
   private final LocaleSource localeSource;
-  private final ConcurrentMap<TranslationKey, TranslationMessage> messages = new ConcurrentHashMap<>();
-  private final ConcurrentMap<TranslationKey, TranslationText> texts = new ConcurrentHashMap<>();
+  private final ConcurrentMap<TranslationKey, TranslationMessage> messages;
+  private final ConcurrentMap<TranslationKey, TranslationText> texts;
 
   public BasicLocaleTranslations(
     final LocaleSource localeSource,
@@ -23,6 +23,8 @@ public class BasicLocaleTranslations
     final Map<TranslationKey, TranslationText> texts
   ) {
     this.localeSource = localeSource;
+    this.messages = new ConcurrentHashMap<>();
+    this.texts = new ConcurrentHashMap<>();
 
     this.messages.putAll(messages);
     this.texts.putAll(texts);
@@ -30,6 +32,8 @@ public class BasicLocaleTranslations
 
   public BasicLocaleTranslations(final LocaleSource localeSource) {
     this.localeSource = localeSource;
+    this.messages = new ConcurrentHashMap<>();
+    this.texts = new ConcurrentHashMap<>();
   }
 
   @Override

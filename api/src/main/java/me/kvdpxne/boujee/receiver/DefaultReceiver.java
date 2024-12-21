@@ -1,4 +1,8 @@
 package me.kvdpxne.boujee.receiver;
 
-public interface DefaultReceiver extends Receiver {
+/**
+ * @since 0.1.0
+ */
+public interface DefaultReceiver
+  extends Receiver {
 }

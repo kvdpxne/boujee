@@ -31,14 +31,21 @@ public class ToChat extends BaseSendable {
    */
   private void send(
     final MinecraftReceiver receiver,
-    final String content
+    final char[] content
   ) {
     if (null == this.prefix || this.prefix.isEmpty()) {
       receiver.onChat(content);
       return;
     }
 
-    receiver.onChat(this.prefix + ' ' + content);
+    final int prefixLength = this.prefix.length();
+    final char[] newContent = new char[prefixLength + content.length + 1];
+
+    newContent[prefixLength + 1] = ' ';
+    System.arraycopy(this.prefix.toCharArray(), 0, newContent, 0, prefixLength);
+    System.arraycopy(content, 0, newContent, prefixLength + 2, content.length);
+
+    receiver.onChat(newContent);
   }
 
   /**
@@ -58,7 +65,7 @@ public class ToChat extends BaseSendable {
 
     if (translation instanceof TranslationMessage) {
       final TranslationMessage message = (TranslationMessage) translation;
-      for (final String line : message.getContent()) {
+      for (final char[] line : message.getContent()) {
         receiver.onChat(line);
       }
       return;

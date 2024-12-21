@@ -1,10 +1,5 @@
 pluginManagement {
 
-  plugins {
-    id("java")
-    id("maven-publish")
-  }
-
   repositories {
     gradlePluginPortal()
 
@@ -12,10 +7,6 @@ pluginManagement {
     mavenLocal()
   }
 }
-
-//plugins {
-//  id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-//}
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
@@ -37,31 +28,47 @@ dependencyResolutionManagement {
     // 1.7.x, 1.6.x and 1.5.x, and all newer versions of spigot-api from
     // 1.8 upwards.
     maven("https://repo.md-5.net/content/repositories/public/")
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots")
+    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
   }
 
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 }
 
-rootProject.name = "boujee"
+files(
+  "./api",
+  "./benchmark",
+  "./chains",
+  "./core",
+  "./inputs/common",
+  "./inputs/json/gson",
+  "./inputs/json/kotlinx-serialization",
+  "./minecraft/api",
+  "./minecraft/bukkit",
+  "./singleton/java",
+  "./singleton/kotlin"
+).forEach {
+  println(it.name)
+//  include(it.name)
+}
 
 sequenceOf(
   "api",
+  "benchmark",
   "chains",
   "core",
-  "inputs/common",
-  "inputs/json/gson",
-  "inputs/json/kotlinx-serialization",
-  "minecraft/api",
-  "minecraft/bukkit",
-  "singleton/java",
-  "singleton/kotlin"
+  "inputs:common",
+  "inputs:json:gson",
+  "inputs:json:kotlinx-serialization",
+  "minecraft:api",
+  "minecraft:bukkit",
+  "singleton:java",
+  "singleton:kotlin"
 ).forEach {
-  val rawName = it.replace('/', '-')
-  val name = "${rootProject.name}-$rawName"
+  val path = ":p-$it"
+  val directory = file("./${it.replace(':', '/')}")
 
-  include(name)
-  project(":$name").projectDir = file("./$it")
+  include(path)
+  project(path).projectDir = directory
 }
 
-
+rootProject.name = "boujee"

@@ -7,11 +7,12 @@ import me.kvdpxne.boujee.Translation;
 import me.kvdpxne.boujee.locale.LocaleSource;
 import me.kvdpxne.boujee.receiver.Receiver;
 import me.kvdpxne.boujee.replace.Replaceable;
+import me.kvdpxne.boujee.replace.Replacer;
 
-public final class TranslationReplacerChains {
+public class TranslationReplacerChains {
 
-  private final List<Receiver> receivers;
-  private final Map<LocaleSource, Translation<?>> translations;
+  protected final List<Receiver> receivers;
+  protected final Map<LocaleSource, Translation<?>> translations;
 
   TranslationReplacerChains(
     final List<Receiver> receivers,
@@ -24,10 +25,10 @@ public final class TranslationReplacerChains {
   /**
    * @since 0.1.0
    */
-  public <T extends SendChoices> T replace(
-    final Supplier<Object> replacerSupplier
-    ) {
-    if (null == replacerSupplier.get()) {
+  protected void performReplace(
+    final Supplier<Replacer> replacerSupplier
+  ) {
+    if (null == replacerSupplier) {
       throw new IllegalArgumentException("Supplier cannot be null");
     }
 
@@ -40,13 +41,28 @@ public final class TranslationReplacerChains {
       }
 
       final Replaceable<?> replaceable = (Replaceable<?>) translation;
-      if (!replaceable.hasPlaceholders()) {
-        continue;
-      }
+      final Replacer replacer = replacerSupplier.get();
 
-
+      this.translations.put(
+        entry.getKey(),
+        (Translation<?>) replaceable.replace(replacer.getReplacements())
+      );
     }
+  }
 
-    return null;
+  /**
+   * @since 0.1.0
+   */
+  public <T extends SendChoices> T replace(
+    final Supplier<Replacer> replacerSupplier
+  ) {
+    throw new UnsupportedOperationException("");
+  }
+
+  /**
+   * @since 0.1.0
+   */
+  public <T extends SendChoices> T skip() {
+    throw new UnsupportedOperationException("");
   }
 }

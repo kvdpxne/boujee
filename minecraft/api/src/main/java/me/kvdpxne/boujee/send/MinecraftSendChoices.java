@@ -61,12 +61,10 @@ public class MinecraftSendChoices
     final Translation<?> translation = this.original();
 
     if (translation instanceof TranslationText) {
-      // noinspection unchecked
       return (T) ((TranslationText) translation).getContent();
     }
 
     if (translation instanceof TranslationMessage) {
-      // noinspection unchecked
       return (T) ((TranslationMessage) translation).getContent();
     }
 

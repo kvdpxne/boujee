@@ -17,7 +17,7 @@ import me.kvdpxne.boujee.Translation;
  * @since 0.1.0
  */
 public interface TranslationMessage
-  extends Translation<String[]> {
+  extends Translation<char[][]> {
 
   /**
    * Retrieves the message content of this translation.
@@ -30,5 +30,10 @@ public interface TranslationMessage
    * @since 0.1.0
    */
   @Override
-  String[] getContent();
+  char[][] getContent();
+
+  /**
+   * @since 0.1.0
+   */
+  String[] getContentAsString();
 }

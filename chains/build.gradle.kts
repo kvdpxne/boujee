@@ -1,3 +1,3 @@
 dependencies {
-  shadow(project(":boujee-api"))
+  shadow(project(":p-api"))
 }

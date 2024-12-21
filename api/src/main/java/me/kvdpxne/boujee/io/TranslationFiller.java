@@ -10,5 +10,7 @@ public interface TranslationFiller {
   /**
    * @since 0.1.0
    */
-  void fill(final TranslationService translationService);
+  void fill(
+    final TranslationService translationService
+  );
 }

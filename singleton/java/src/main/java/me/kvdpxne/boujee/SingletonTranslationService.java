@@ -6,7 +6,7 @@ import me.kvdpxne.boujee.locale.BasicLocaleSource;
 /**
  * @since 0.1.0
  */
-public class SingletonTranslationService
+public final class SingletonTranslationService
   extends BasicTranslationService {
 
   /**
@@ -27,7 +27,7 @@ public class SingletonTranslationService
   /**
    * @since 0.1.0
    */
-  protected SingletonTranslationService() {
+  private SingletonTranslationService() {
     super(new BasicLocaleSource(Locale.getDefault()));
   }
 }

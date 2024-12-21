@@ -1,19 +1,26 @@
 package me.kvdpxne.boujee.text;
 
+import java.util.Arrays;
+
 public class BasicTranslationText
   implements TranslationText {
 
   private static final long serialVersionUID = 2118276182344594976L;
 
-  protected final String content;
+  protected final char[] text;
 
-  public BasicTranslationText(final String content) {
-    this.content = content;
+  public BasicTranslationText(final char[] text) {
+    this.text = text;
   }
 
   @Override
-  public String getContent() {
-    return this.content;
+  public char[] getContent() {
+    return Arrays.copyOf(this.text, this.text.length);
+  }
+
+  @Override
+  public String getContentAsString() {
+    return new String(this.text);
   }
 
   @Override
@@ -27,11 +34,11 @@ public class BasicTranslationText
     }
 
     final BasicTranslationText that = (BasicTranslationText) o;
-    return this.content.equals(that.content);
+    return Arrays.equals(this.text, that.text);
   }
 
   @Override
   public int hashCode() {
-    return this.content.hashCode();
+    return Arrays.hashCode(this.text);
   }
 }

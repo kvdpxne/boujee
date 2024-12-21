@@ -38,7 +38,7 @@ public interface Replaceable<T extends Replaceable<T>> {
    * applied.
    * @since 0.1.0
    */
-  T replace(final String field, final Object value);
+  T replace(final char[] field, final char[] value);
 
   /**
    * Replaces multiple placeholders in the content with their corresponding
@@ -54,10 +54,5 @@ public interface Replaceable<T extends Replaceable<T>> {
    * applied.
    * @since 0.1.0
    */
-  T replace(final Map<String, Object> values);
-
-  /**
-   * @since 0.1.0
-   */
-  boolean hasPlaceholders();
+  T replace(final Map<char[], char[]> values);
 }

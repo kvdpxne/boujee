@@ -5,4 +5,8 @@ package me.kvdpxne.boujee.receiver;
  */
 public interface MinecraftConsole
   extends MinecraftReceiver, DefaultReceiver {
+
+  void onConsoleColored(final char[] content);
+
+  void onConsole(final char[] content);
 }
