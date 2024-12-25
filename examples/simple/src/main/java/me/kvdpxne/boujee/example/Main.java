@@ -53,7 +53,8 @@ public final class Main {
       = SingletonTranslationService.getInstance();
 
     // Fills the translation service with messages and text.
-    GsonTranslationFiller.INSTANCE.fill(translationService);
+    GsonTranslationFiller.INSTANCE
+      .fill("assets/languages", translationService);
 
     //
     printTranslation(EnumSupportedLocale.PL_PL);
