@@ -10,6 +10,9 @@ import me.kvdpxne.boujee.locale.LocaleTranslations;
 import me.kvdpxne.boujee.message.TranslationMessage;
 import me.kvdpxne.boujee.text.TranslationText;
 
+/**
+ * @since 0.1.0
+ */
 public class BasicTranslationService
   implements TranslationService {
 
@@ -149,6 +152,15 @@ public class BasicTranslationService
       throw new RuntimeException("No translations container found for " + this.defaultLocaleSource);
     }
 
+    final LocaleTranslations translations =
+      this.translations.get(this.defaultLocaleSource);
+
+    if (null == translations) {
+      throw new IllegalStateException("");
+    }
+
+    this.defaultLocaleTranslations = translations;
+    this.translations.remove(this.defaultLocaleSource);
   }
 
   @Override
@@ -208,7 +220,6 @@ public class BasicTranslationService
           "The default locale collection of translations cannot be null."
         );
       }
-
       this.updateDefaultLocaleTranslations();
     }
 
@@ -239,17 +250,34 @@ public class BasicTranslationService
     if (null != this.defaultLocaleSource) {
       ++count;
     }
+
     return count;
   }
 
   @Override
   public int getNumberOfMessages() {
-    return this.translations.size();
+    if (null != this.defaultLocaleTranslations) {
+      return this.defaultLocaleTranslations.getNumberOfMessages();
+    }
+
+    for (final LocaleTranslations translations : this.translations.values()) {
+      return translations.getNumberOfMessages();
+    }
+
+    return 0;
   }
 
   @Override
   public int getNumberOfTexts() {
-    return this.translations.size();
+    if (null != this.defaultLocaleTranslations) {
+      return this.defaultLocaleTranslations.getNumberOfTexts();
+    }
+
+    for (final LocaleTranslations translations : this.translations.values()) {
+      return translations.getNumberOfTexts();
+    }
+
+    return 0;
   }
 
   @Override

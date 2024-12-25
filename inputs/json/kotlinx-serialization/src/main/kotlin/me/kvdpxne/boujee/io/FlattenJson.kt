@@ -5,7 +5,6 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
-import me.kvdpxne.boujee.BasicTranslationKey
 import me.kvdpxne.boujee.Translation
 import me.kvdpxne.boujee.TranslationKey
 import me.kvdpxne.boujee.message.BasicTranslationMessage
@@ -42,7 +41,7 @@ internal object FlattenJson {
       "SingleMessage content cannot be blank."
     }
 
-    return BasicTranslationText(rawText)
+    return BasicTranslationText(rawText.toCharArray())
   }
 
   /**
@@ -61,17 +60,20 @@ internal object FlattenJson {
       "Expected a non-empty JSON array for MultipleMessages."
     }
 
-    val messages: MutableList<String> = ArrayList(json.size)
-    for (lineElement: JsonElement in json) {
-      val linePrimitive: JsonPrimitive = lineElement.jsonPrimitive
-      require(linePrimitive.isString) {
+    val size: Int = json.size
+    val messages: Array<CharArray?> = arrayOfNulls(size)
+
+    var i = 0
+    while (i != size) {
+      val next: JsonPrimitive = json[i].jsonPrimitive
+      require(next.isString) {
         "Expected all elements in JSON array to be strings."
       }
-
-      messages.add(linePrimitive.content)
+      messages[i] = next.content.toCharArray()
+      ++i
     }
 
-    return BasicTranslationMessage(messages.toTypedArray())
+    return BasicTranslationMessage(messages)
   }
 
   /**
@@ -116,8 +118,8 @@ internal object FlattenJson {
 
       when (element) {
         is JsonObject -> map.putAll(flattenJsonObject(element, newKey, map))
-        is JsonPrimitive -> map[BasicTranslationKey.of(newKey)] = toText(element)
-        is JsonArray -> map[BasicTranslationKey.of(newKey)] = toMessage(element)
+        is JsonPrimitive -> map[TranslationKey.of(newKey)] = toText(element)
+        is JsonArray -> map[TranslationKey.of(newKey)] = toMessage(element)
       }
     }
 

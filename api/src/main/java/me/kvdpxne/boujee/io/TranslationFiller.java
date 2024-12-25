@@ -11,6 +11,7 @@ public interface TranslationFiller {
    * @since 0.1.0
    */
   void fill(
+    final String path,
     final TranslationService translationService
   );
 }

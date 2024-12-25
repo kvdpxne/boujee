@@ -66,6 +66,16 @@ public class BasicLocaleTranslations
   }
 
   @Override
+  public int getNumberOfMessages() {
+    return this.messages.size();
+  }
+
+  @Override
+  public int getNumberOfTexts() {
+    return this.texts.size();
+  }
+
+  @Override
   public void clear() {
     this.messages.clear();
     this.texts.clear();

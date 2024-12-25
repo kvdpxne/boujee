@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
   jmh(libraries.jmh.core)
-  implementation(project(":p-core"))
+  implementation(project(":core"))
 
   // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
   implementation("org.apache.commons:commons-lang3:3.17.0")

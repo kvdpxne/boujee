@@ -2,20 +2,51 @@ package me.kvdpxne.boujee.text;
 
 import java.util.Arrays;
 
+/**
+ * @since 0.1.0
+ */
 public class BasicTranslationText
   implements TranslationText {
 
+  /**
+   * @since 0.1.0
+   */
   private static final long serialVersionUID = 2118276182344594976L;
 
+  /**
+   * @since 0.1.0
+   */
   protected final char[] text;
 
-  public BasicTranslationText(final char[] text) {
+  /**
+   * @param text
+   * @throws NullPointerException
+   *
+   * @since 0.1.0
+   */
+  public BasicTranslationText(
+    final char[] text
+  ) {
+    if (null == text) {
+      throw new NullPointerException(
+        "The passed 1d character array must not be null."
+      );
+    }
     this.text = text;
+  }
+
+  /**
+   * @since 0.1.0
+   */
+  public BasicTranslationText() {
+    this.text = new char[0];
   }
 
   @Override
   public char[] getContent() {
-    return Arrays.copyOf(this.text, this.text.length);
+    final char[] copy = new char[this.text.length];
+    System.arraycopy(this.text, 0, copy, 0, this.text.length);
+    return copy;
   }
 
   @Override

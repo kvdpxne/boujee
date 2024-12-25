@@ -1,4 +1,4 @@
 dependencies {
-  shadow(project(":p-api"))
-  shadow(project(":p-chains"))
+  shadow(project(":api"))
+  shadow(project(":chains"))
 }

@@ -1,9 +1,9 @@
 dependencies {
-  shadow(project(":p-api"))
-  shadow(project(":p-core"))
-  shadow(project(":p-inputs:common"))
+  shadow(project(":api"))
+  shadow(project(":core"))
+  shadow(project(":inputs-common"))
 
-  testImplementation(project(":p-api"))
+  testImplementation(project(":api"))
 
   shadow(libraries.gson)
 }

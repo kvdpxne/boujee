@@ -11,11 +11,12 @@ object JsonTranslationFiller : TranslationFiller {
   /**
    * @since 0.1.0
    */
-  override fun fill(translationService: TranslationService) {
-    if (translationService !is BasicTranslationService) {
-      return
+  override fun fill(
+    path: String,
+    translationService: TranslationService
+  ) {
+    if (translationService is BasicTranslationService) {
+      translationService.updateTranslations(InsideJsonReader.read(path))
     }
-
-    translationService.updateTranslations(InsideJsonReader.read())
   }
 }

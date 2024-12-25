@@ -2,7 +2,6 @@ package me.kvdpxne.boujee;
 
 import java.util.concurrent.TimeUnit;
 import me.kvdpxne.boujee.replace.Characters;
-import org.apache.commons.lang3.StringUtils;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;

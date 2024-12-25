@@ -77,6 +77,16 @@ public interface LocaleTranslations {
   );
 
   /**
+   * @since 0.1.0
+   */
+  int getNumberOfMessages();
+
+  /**
+   * @since 0.1.0
+   */
+  int getNumberOfTexts();
+
+  /**
    * Clears all stored translations, including messages and texts, associated
    * with this locale.
    * <p>

@@ -70,12 +70,13 @@ internal object InsideJsonReader {
    * @since 0.1.0
    */
   internal fun read(
+    rawPath: String,
     name: String
   ): LocaleTranslations {
     return InsideFiles.files(
       this::class.java.classLoader,
-      "translations"
-    ) { _, path ->
+      rawPath
+    ) { _, path: Path ->
       Files.walk(path)
         .filter(Files::isRegularFile)
         .filter {
@@ -95,10 +96,12 @@ internal object InsideJsonReader {
    * @return A collection of `LocaleMessages` for all available locales.
    * @since 0.1.0
    */
-  internal fun read(): Collection<LocaleTranslations> {
+  internal fun read(
+    rawPath: String
+  ): Collection<LocaleTranslations> {
     return InsideFiles.files(
       this::class.java.classLoader,
-      "translations"
+      rawPath
     ) { fileSystem: FileSystem, path: Path ->
       val f: List<LocaleTranslations> = Files.walk(path)
         .filter(Files::isRegularFile)

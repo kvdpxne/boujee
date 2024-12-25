@@ -34,28 +34,14 @@ dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 }
 
-files(
-  "./api",
-  "./benchmark",
-  "./chains",
-  "./core",
-  "./inputs/common",
-  "./inputs/json/gson",
-  "./inputs/json/kotlinx-serialization",
-  "./minecraft/api",
-  "./minecraft/bukkit",
-  "./singleton/java",
-  "./singleton/kotlin"
-).forEach {
-  println(it.name)
-//  include(it.name)
-}
-
 sequenceOf(
   "api",
   "benchmark",
   "chains",
   "core",
+  "examples:complex",
+  "examples:minecraft:bukkit",
+  "examples:simple",
   "inputs:common",
   "inputs:json:gson",
   "inputs:json:kotlinx-serialization",
@@ -64,11 +50,11 @@ sequenceOf(
   "singleton:java",
   "singleton:kotlin"
 ).forEach {
-  val path = ":p-$it"
+  val name = it.replace(':', '-')
   val directory = file("./${it.replace(':', '/')}")
 
-  include(path)
-  project(path).projectDir = directory
+  include(name)
+  project(":$name").projectDir = directory
 }
 
 rootProject.name = "boujee"
