@@ -2,7 +2,7 @@ package me.kvdpxne.boujee.send;
 
 import java.util.List;
 import java.util.Map;
-import me.kvdpxne.boujee.Translation;
+import me.kvdpxne.boujee.content.Translation;
 import me.kvdpxne.boujee.locale.LocaleSource;
 import me.kvdpxne.boujee.receiver.Receiver;
 

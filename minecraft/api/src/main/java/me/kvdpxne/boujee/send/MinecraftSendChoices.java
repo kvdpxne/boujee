@@ -3,12 +3,12 @@ package me.kvdpxne.boujee.send;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-import me.kvdpxne.boujee.Translation;
+import me.kvdpxne.boujee.content.Translation;
 import me.kvdpxne.boujee.chains.SendChoices;
 import me.kvdpxne.boujee.locale.LocaleSource;
-import me.kvdpxne.boujee.message.TranslationMessage;
+import me.kvdpxne.boujee.content.message.TranslationMessage;
 import me.kvdpxne.boujee.receiver.Receiver;
-import me.kvdpxne.boujee.text.TranslationText;
+import me.kvdpxne.boujee.content.text.TranslationText;
 
 /**
  * @since 0.1.0

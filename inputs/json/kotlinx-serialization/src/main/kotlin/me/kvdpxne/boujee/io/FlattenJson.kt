@@ -5,12 +5,13 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
-import me.kvdpxne.boujee.Translation
+import me.kvdpxne.boujee.DefaultTranslationKey
+import me.kvdpxne.boujee.content.Translation
 import me.kvdpxne.boujee.TranslationKey
-import me.kvdpxne.boujee.message.BasicTranslationMessage
-import me.kvdpxne.boujee.message.TranslationMessage
-import me.kvdpxne.boujee.text.BasicTranslationText
-import me.kvdpxne.boujee.text.TranslationText
+import me.kvdpxne.boujee.content.message.BasicTranslationMessage
+import me.kvdpxne.boujee.content.message.TranslationMessage
+import me.kvdpxne.boujee.content.text.BasicTranslationText
+import me.kvdpxne.boujee.content.text.TranslationText
 /**
  * A utility object for flattening JSON structures into message representations.
  *
@@ -118,8 +119,8 @@ internal object FlattenJson {
 
       when (element) {
         is JsonObject -> map.putAll(flattenJsonObject(element, newKey, map))
-        is JsonPrimitive -> map[TranslationKey.of(newKey)] = toText(element)
-        is JsonArray -> map[TranslationKey.of(newKey)] = toMessage(element)
+        is JsonPrimitive -> map[DefaultTranslationKey.of(newKey)] = toText(element)
+        is JsonArray -> map[DefaultTranslationKey.of(newKey)] = toMessage(element)
       }
     }
 

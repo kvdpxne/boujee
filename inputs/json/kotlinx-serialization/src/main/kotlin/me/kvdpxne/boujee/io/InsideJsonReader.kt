@@ -9,14 +9,14 @@ import kotlin.io.path.nameWithoutExtension
 import kotlin.io.path.readText
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import me.kvdpxne.boujee.Translation
+import me.kvdpxne.boujee.content.Translation
 import me.kvdpxne.boujee.TranslationKey
 import me.kvdpxne.boujee.locale.BasicLocaleSource
 import me.kvdpxne.boujee.locale.BasicLocaleTranslations
 import me.kvdpxne.boujee.locale.LocaleTranslations
 import me.kvdpxne.boujee.locale.Locales
-import me.kvdpxne.boujee.message.TranslationMessage
-import me.kvdpxne.boujee.text.TranslationText
+import me.kvdpxne.boujee.content.message.TranslationMessage
+import me.kvdpxne.boujee.content.text.TranslationText
 
 /**
  * A utility to read locale-specific JSON translation files and parse them into `LocaleMessages`.

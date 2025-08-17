@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import me.kvdpxne.boujee.Translation;
+import me.kvdpxne.boujee.content.Translation;
 import me.kvdpxne.boujee.TranslationKeyProvider;
 import me.kvdpxne.boujee.TranslationService;
 import me.kvdpxne.boujee.locale.LocaleSource;

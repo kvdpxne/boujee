@@ -6,6 +6,6 @@ import me.kvdpxne.boujee.locale.BasicLocaleSource
 /**
  * @since 0.1.0
  */
-object SingletonTranslationService : BasicTranslationService(
+object SingletonTranslationService : DefaultTranslationService(
   BasicLocaleSource(Locale.getDefault())
 )

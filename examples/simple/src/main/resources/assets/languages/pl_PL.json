@@ -1,0 +1,15 @@
+{
+  "example": {
+    "text": "To jest przykładowy tekst.",
+    "message": [
+      "To jest",
+      "przykładowa wiadomość"
+    ]
+  },
+  "hello": {
+    "world": [
+      "Witaj",
+      "Świecie!"
+    ]
+  }
+}

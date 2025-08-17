@@ -1,0 +1,15 @@
+{
+  "example": {
+    "text": "This is a example text.",
+    "message": [
+      "This is an",
+      "example message."
+    ]
+  },
+  "hello": {
+    "world": [
+      "Hello",
+      "World!"
+    ]
+  }
+}

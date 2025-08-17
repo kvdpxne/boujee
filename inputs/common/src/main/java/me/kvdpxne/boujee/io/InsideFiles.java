@@ -5,7 +5,9 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.function.BiFunction;
 
@@ -63,21 +65,31 @@ public final class InsideFiles {
    */
   public static <T> T files(
     final ClassLoader classLoader,
-    final String path,
+    final String path,  // np. "assets/languages"
     final BiFunction<FileSystem, Path, T> function
   ) {
-    final URL resource = classLoader.getResource(path);
-    if (null == resource) {
-      throw new IllegalArgumentException("Resource not found: " + path);
-    }
+    URL resource = classLoader.getResource(path);
+    if (resource == null) throw new IllegalArgumentException("...");
 
-    final String[] parts = resource.getPath().split("!");
-    try (final FileSystem fileSystem = FileSystems.newFileSystem(
-      URI.create(parts[0]), Collections.emptyMap()
-    )) {
-      return function.apply(fileSystem, fileSystem.getPath(parts[1]));
-    } catch (final IOException exception) {
-      throw new RuntimeException(exception);
+    try {
+      URI uri = resource.toURI();
+
+      if ("jar".equals(uri.getScheme())) {
+        // Jesteśmy w JAR — bezpiecznie otwieramy
+        try (FileSystem fs = FileSystems.newFileSystem(uri, Collections.emptyMap())) {
+          return function.apply(fs, fs.getPath(path));
+        }
+      } else {
+        // Jesteśmy w katalogu (np. target/classes) — nie tworzymy osobnego FileSystem
+        Path p = Paths.get(uri);
+        if (!Files.exists(p))
+          throw new IllegalArgumentException("Not found: " + p);
+
+        // Używamy domyślnego systemu plików
+        return function.apply(FileSystems.getDefault(), p);
+      }
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to open: " + path, e);
     }
   }
 }

@@ -1,4 +1,6 @@
-package me.kvdpxne.boujee;
+package me.kvdpxne.boujee.exceptions;
+
+import me.kvdpxne.boujee.content.Translation;
 
 /**
  * @since 0.1.0

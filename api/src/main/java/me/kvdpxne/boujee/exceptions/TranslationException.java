@@ -1,4 +1,4 @@
-package me.kvdpxne.boujee;
+package me.kvdpxne.boujee.exceptions;
 
 /**
  * Represents an exception that occurs during translation-related operations.
@@ -10,7 +10,8 @@ package me.kvdpxne.boujee;
  * @since 0.1.0
  */
 public class TranslationException
-  extends RuntimeException {
+  extends
+  RuntimeException {
 
   /**
    * A unique identifier for serialization purposes.

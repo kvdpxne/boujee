@@ -1,6 +1,6 @@
 package me.kvdpxne.boujee.io
 
-import me.kvdpxne.boujee.BasicTranslationService
+import me.kvdpxne.boujee.DefaultTranslationService
 import me.kvdpxne.boujee.TranslationService
 
 /**
@@ -15,7 +15,7 @@ object JsonTranslationFiller : TranslationFiller {
     path: String,
     translationService: TranslationService
   ) {
-    if (translationService is BasicTranslationService) {
+    if (translationService is DefaultTranslationService) {
       translationService.updateTranslations(InsideJsonReader.read(path))
     }
   }

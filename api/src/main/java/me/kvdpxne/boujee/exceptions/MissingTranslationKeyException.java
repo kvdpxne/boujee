@@ -1,4 +1,4 @@
-package me.kvdpxne.boujee;
+package me.kvdpxne.boujee.exceptions;
 
 /**
  * Represents an exception that is thrown when a required translation key is
@@ -10,8 +10,9 @@ package me.kvdpxne.boujee;
  *
  * @since 0.1.0
  */
-public class MissingTranslationKeyException
-  extends TranslationException {
+public final class MissingTranslationKeyException
+  extends
+  TranslationException {
 
   /**
    * A unique identifier for serialization purposes.

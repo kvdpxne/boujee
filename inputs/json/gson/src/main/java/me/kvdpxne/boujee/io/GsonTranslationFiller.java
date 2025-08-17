@@ -1,6 +1,6 @@
 package me.kvdpxne.boujee.io;
 
-import me.kvdpxne.boujee.BasicTranslationService;
+import me.kvdpxne.boujee.DefaultTranslationService;
 import me.kvdpxne.boujee.TranslationService;
 
 public class GsonTranslationFiller
@@ -14,8 +14,10 @@ public class GsonTranslationFiller
     final String path,
     final TranslationService translationService
   ) {
-    if (translationService instanceof BasicTranslationService) {
-//      ((BasicTranslationService) translationService).updateTranslations();
+    if (translationService instanceof DefaultTranslationService) {
+      ((DefaultTranslationService) translationService).updateTranslations(
+        InsideGsonReader.read(path)
+      );
     }
   }
 }

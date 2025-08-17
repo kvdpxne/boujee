@@ -8,6 +8,6 @@ public enum EnumTranslationKey
 
   @Override
   public TranslationKey getTranslationKey() {
-    return TranslationKey.of(this.name());
+    return DefaultTranslationKey.of(this.name());
   }
 }

@@ -18,7 +18,7 @@ public final class Main {
 
     //
     final LocaleTranslations localeTranslations
-      = translationService.findLocaleTranslationsOrNull(localeSourceProvider);
+      = translationService.findLocaleTranslationsOrDefault(localeSourceProvider);
 
     //
     final String exampleText = localeTranslations
